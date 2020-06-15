@@ -18,7 +18,7 @@ This refers to the instance of Docker that has been set-up on port 49160. If you
 Once this project is downloaded to your machine, run the following commands to install the node packages and start the project:
 
 - npm i
-- npm start
+- node app.js
 
 ## Future enhancements
 - [ ] Implement authentication
