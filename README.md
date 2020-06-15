@@ -15,6 +15,7 @@ The file todoListController.js in the Controllers folder has a line: const baseU
 
 This refers to the instance of Docker that has been set-up on port 49160. If you specify a different port number or deploy the ToDoList Server to somewhere different, then change this reference.
 
+Once this project is downloaded to your machine, use 'npm i' to reinstall the node packages and then use 'npm start'.
 
 ## Future enhancements
 - [ ] Implement authentication
