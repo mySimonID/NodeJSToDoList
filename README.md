@@ -1,7 +1,7 @@
 # NodeJSToDoList
 A simple ToDo list created using nodejs. 
 
-##Overview
+## Overview
 
 The code provides a simple ToDo list to show a list of ToDo items, Add a new ToDo item and then either update or delete the item.
 
@@ -9,6 +9,11 @@ The REST server [ToDoListServer](https://github.com/mySimonID/TodoListServer/blo
 
 ## Using
 
+This project assumes that the [ToDoListServer](https://github.com/mySimonID/TodoListServer/blob/master/README.md) has been set-up on a Docker instance.
+
+The file todoListController.js in the Controllers folder has a line: const baseURL = 'http://localhost:49160/';
+
+This refers to the instance of Docker that has been set-up on port 49160. If you specify a different port number or deploy the ToDoList Server to somewhere different, then change this reference.
 
 
 ## Future enhancements
