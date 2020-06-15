@@ -12,7 +12,7 @@
 <body>
 
   <div class="todoList-container">
-<h1>nodeJS - ToDoList</h1>
+    <h1>nodeJS - ToDoList</h1>
 
     <div class="todo-form-container">
 
@@ -33,8 +33,9 @@
       <ul class="todo-list">
         <% todos.forEach(function(todo) { %>
         <li>
-          <a href="/edit/<%=todo._id%>"><%=todo.Text%></a> 
-          <a href="/delete/<%=todo._id%>" onclick="return confirm('Are you sure that you want to delete?')"><i class="material-icons icon-black">delete</i></a>
+          <a href="/edit/<%=todo._id%>"><%=todo.Text%></a>
+          <a href="/delete/<%=todo._id%>" onclick="return confirm('Are you sure that you want to delete?')"><i
+              class="material-icons icon-black">delete</i></a>
         </li>
 
         <% }); %>
