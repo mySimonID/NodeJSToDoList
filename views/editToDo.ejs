@@ -1,0 +1,45 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <!-- Compiled and minified CSS -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/styles.css" type="text/css">
+
+</head>
+
+<body>
+  <h1>Edit ToDo</h1>
+
+  <!-- TODOLIST -->
+  <div class="todo-list-container">
+    <ul class="todo-list">
+      <% todos.forEach(function(todo) { %>
+      <li>
+        <% if( todo._id == current ){ %>
+        <form action="/save/<%=current%>" method="post">
+
+          <div class="editForm">
+            <input type="text" name="Text" value="<%=todo.Text%>">
+            <button type="submit"><i class="material-icons icon-black">save</i></button>
+            <a href="/cancelEdit/"><i class="material-icons icon-black">cancel</i></a>
+          </div>
+        </form>
+        <% } else { %>
+        <a href="/delete/<%=todo._id%>" ><%=todo.Text%><i class="material-icons icon-black" onclick="return confirm('Are you sure that you want to delete?')">delete</i></a>
+
+      </li>
+      <% } %>
+
+
+      <% }); %>
+
+    </ul>
+  </div>
+  </div>
+</body>
+
+</html>

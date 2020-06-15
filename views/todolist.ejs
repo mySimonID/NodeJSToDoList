@@ -1,0 +1,73 @@
+<html>
+
+<head>
+  <title>ToDo List</title>
+
+  <!-- Compiled and minified CSS -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/styles.css" type="text/css">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+</head>
+
+<body>
+
+  <div class="todoList-container">
+<h1>nodeJS - ToDoList</h1>
+
+    <div class="todo-form-container">
+
+      <form action="/new" method="post">
+
+        <div class="editForm">
+          <input type="text" name="Text" placeholder="Add new todo item...">
+          <button type="submit"><i class="material-icons icon-black">check</i></button>
+        </div>
+
+      </form>
+
+    </div>
+
+
+    <!-- TODOLIST -->
+    <div class="todo-list-container">
+      <ul class="todo-list">
+        <% todos.forEach(function(todo) { %>
+        <li>
+          <a href="/edit/<%=todo._id%>"><%=todo.Text%></a> 
+          <a href="/delete/<%=todo._id%>" onclick="return confirm('Are you sure that you want to delete?')"><i class="material-icons icon-black">delete</i></a>
+        </li>
+
+        <% }); %>
+
+      </ul>
+    </div>
+  </div>
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <script>
+    function deleteToDo(e) {
+      console.log('Delete todo', e);
+
+      var data = new FormData()
+      data.set('name', e)
+
+      let request = new XMLHttpRequest();
+      request.open("POST", 'http://localhost:3000/delete/' + e, true);
+      request.send(data);
+      window.location.reload();
+    }
+
+    function setupFormForUpdate(e) {
+
+    }
+
+    function updateToDo(e) {
+      console.log('Edit todo', e);
+    }
+  </script>
+
+</body>
+
+</html>
