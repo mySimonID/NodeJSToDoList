@@ -1,6 +1,8 @@
 const express = require('express');
 const todoListController = require('./controllers/todoListController');
+const appRoutesController = require('./controllers/appRoutesController')
 
+const {serverURL} = require('./controllers/constants')
 
 const app = express();
 
@@ -9,8 +11,9 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use('/assets',express.static('assets'));
 
-// The Controller will control the routes
-todoListController(app);
+// The controllers will control the routes
+todoListController(app, serverURL);
+appRoutesController(app, serverURL);
 
 const PORT=3000;
 const HOST='localhost';

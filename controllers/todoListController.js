@@ -1,17 +1,25 @@
+/*
+ * todoListController.js
+ * Interface to the ToDoListServer
+ * 
+ * 
+ * get('/')              - return all todo items
+ * post('/new')          - add a single todo to the DB
+ * post('/delete/:id'    - Delete an item from the DB
+ * post('/save/:id'      - Save (update) an existing item to the DB
+ */
+
 const axios = require('axios');
 const bodyParser = require('body-parser');
-
-const baseURL = 'http://localhost:49160/';
-
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
+module.exports = function (app, serverURL) {
 
-module.exports = function (app) {
-
-  //Get all todos
+  // Return all todos
+  //
   app.get('/', (req, res) => {
 
-    axios.get(baseURL)
+    axios.get(serverURL)
       .then(response => {
         res.render('todolist', { todos: response.data });
       })
@@ -20,66 +28,52 @@ module.exports = function (app) {
   });
 
   // New ToDo
+  //
   app.post('/new', urlencodedParser, (req, res) => {
-    console.log("Posting", req.body);
+    // console.log("Posting/new", req.body);
 
-    axios.post(baseURL + 'new', req.body)
+    axios.post(serverURL + '/new', req.body)
       .then(response => {
         res.redirect('/');
-        //console.log(response.data);
       }).catch(err => res.render('error', { errorMessage: err.message }))
   });
 
   //Delete Todo
+  //
   app.get('/delete/:id', urlencodedParser, (req, res) => {
-    console.log("Deleting", req.params.id);
+    // console.log("Deleting", req.params.id);
 
-    //Logic to delete the item
+    //
+    // Pass the id of the todo to the server for deletion
+    // then redirect the user to the root page
+    //
 
-    //axios.post(baseURL + 'delete/'+ req.params.name.replace(/\-/g, " "),req.body)
-    axios.post(baseURL + 'delete/' + req.params.id, req.body)
+    axios.post(serverURL + '/delete/' + req.params.id, req.body)
       .then(response => {
         res.redirect('/');
       }).catch(err => res.render('error', { errorMessage: err.message }));
 
   });
 
-  //Edit ToDo
-  //Reshow List of ToDo items
-  app.get('/edit/:id', urlencodedParser, (req, res) => {
-
-    axios.get(baseURL)
-      .then(response => {
-        res.render('editToDo', { todos: response.data, current: req.params.id });
-      })
-      .catch(err => res.render('error', { errorMessage: err.message }));
-    //
-  });
-
+  // Save existing ToDo
   //
   app.post('/save/:id', urlencodedParser, (req, res) => {
+    // console.log("SAVE:", req.params.id, req.body.Text);
 
-    console.log("SAVE:", req.params.id, req.body.Text);
+    //
+    // Create a temporary todo (so that is matchws the todo schem on the server)
+    // then pass to the server.
+    //
 
     var todo = {
       _id: req.params.id,
       Text: req.body.Text
     }
 
-    axios.post(baseURL + 'save/' + req.params.id, todo)
+    axios.post(serverURL + '/save/' + req.params.id, todo)
       .then(response => {
         res.redirect('/');
       }).catch(err => res.render('error', { errorMessage: err.message }));
 
   });
-
-  //
-  app.get('/cancelEdit', (req, res) => {
-    res.redirect('/');
-  });
-
-  app.get('/example', (req, res) => {
-    res.render('example')
-  })
-
 }

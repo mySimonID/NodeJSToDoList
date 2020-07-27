@@ -11,10 +11,11 @@
 
 <body>
 
+  <h1>ToDoList</h1>
   <div class="todoList-container">
-    <h1>nodeJS - ToDoList</h1>
 
-    <div class="todo-form-container">
+    <!-- HEADING -->
+    <div class="todoForm-container">
 
       <form action="/new" method="post">
 
@@ -28,9 +29,9 @@
     </div>
 
 
-    <!-- TODOLIST -->
-    <div class="todo-list-container">
-      <ul class="todo-list">
+    <!-- TODOLIST BODY -->
+    <div class="todoList">
+      <ul>
         <% todos.forEach(function(todo) { %>
         <li>
           <a href="/edit/<%=todo._id%>"><%=todo.Text%></a>
@@ -58,14 +59,6 @@
       request.open("POST", 'http://localhost:3000/delete/' + e, true);
       request.send(data);
       window.location.reload();
-    }
-
-    function setupFormForUpdate(e) {
-
-    }
-
-    function updateToDo(e) {
-      console.log('Edit todo', e);
     }
   </script>
 
